@@ -1,0 +1,54 @@
+package com.service;
+
+import java.util.List;
+
+import com.doalayer.LoginDao;
+
+public class User {
+	private String userName;
+	private String password;
+	LoginDao loginDao = null;
+	
+	public boolean getLogin(String user, String password){
+		System.out.println("service layer...");
+		List<User> userList = getUserData();
+
+		
+		for(User login:userList){
+			System.out.println(login.getUserName());
+			System.out.println(login.getPassword());
+			if(user.equals(login.getUserName()) && password.equals(login.getPassword()))
+				return true;
+		}
+		
+		return false;
+	}
+	
+	
+	public List<User> getUserData(){
+		System.out.println("getUserData on service layer....");
+		loginDao = new LoginDao();
+		List<User> list = loginDao.getUser();
+		return list;
+	}
+	
+	public void setLoginData(String username, String password){
+		
+	}
+	
+	public String getPassword(){
+		return password;
+	}
+	
+	public void setPassword(String password){
+		this.password=password;
+	}
+	
+	public String getUserName(){
+		return userName;
+	}
+	
+	public void setUserName(String userName){
+		this.userName=userName;
+	}
+}
